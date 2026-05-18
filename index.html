@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webloom Studio | Modern Web Design</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root{
+      --stroke: rgba(255,255,255,.12);
+      --text: #f4f7fb;
+      --muted: #a9b7c7;
+      --blue: #4ab8ff;
+      --cyan: #7ee8ff;
+      --card: rgba(255,255,255,.07);
+      --radius: 28px;
+      --shadow: 0 30px 90px rgba(0,0,0,.45);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--text);
+      overflow-x:hidden;
+
+      background:
+      radial-gradient(circle at 20% 20%, rgba(74,184,255,.16), transparent 32%),
+      radial-gradient(circle at 80% 10%, rgba(126,232,255,.10), transparent 28%),
+      linear-gradient(180deg,#04101b 0%,#071827 42%,#030911 100%);
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+
+      background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+
+      background-size:70px 70px;
+
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.45), transparent 75%);
+      z-index:-2;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      width:min(1180px,92%);
+      margin:auto;
+    }
+
+    .orb{
+      position:fixed;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+
+      background:
+      radial-gradient(circle,rgba(74,184,255,.22),transparent 65%);
+
+      filter:blur(12px);
+      pointer-events:none;
+      z-index:-1;
+
+      animation:floatOrb 9s ease-in-out infinite alternate;
+    }
+
+    .orb.one{
+      top:10%;
+      left:-160px;
+    }
+
+    .orb.two{
+      right:-170px;
+      top:38%;
+      animation-delay:1.5s;
+    }
+
+    @keyframes floatOrb{
+      from{
+        transform:translateY(-20px) scale(1);
+      }
+
+      to{
+        transform:translateY(45px) scale(1.08);
+      }
+    }
+
+    header{
+      position:fixed;
+      top:18px;
+      left:50%;
+      transform:translateX(-50%);
+
+      width:min(1180px,92%);
+
+      z-index:50;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:12px 16px;
+
+      border:1px solid var(--stroke);
+      border-radius:999px;
+
+      background:rgba(5,15,26,.62);
+
+      backdrop-filter:blur(18px);
+
+      box-shadow:0 14px 55px rgba(0,0,0,.28);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand img{
+      width:78px;
+      height:48px;
+
+      object-fit:cover;
+      object-position:center;
+
+      border-radius:14px;
+
+      box-shadow:0 8px 25px rgba(0,0,0,.35);
+    }
+
+    .brand span{
+      font-weight:800;
+      letter-spacing:.3px;
+      font-size:15px;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:24px;
+
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    nav a{
+      transition:.25s ease;
+    }
+
+    nav a:hover{
+      color:white;
+      transform:translateY(-1px);
+    }
+
+    .nav-cta{
+      color:#06111d;
+
+      background:
+      linear-gradient(135deg,var(--cyan),var(--blue));
+
+      padding:11px 16px;
+
+      border-radius:999px;
+
+      font-weight:700;
+    }
+
+    .hero{
+      min-height:100vh;
+
+      display:grid;
+      place-items:center;
+
+      padding:130px 0 70px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      color:var(--cyan);
+
+      letter-spacing:3px;
+      text-transform:uppercase;
+
+      font-size:13px;
+      font-weight:700;
+
+      margin-bottom:20px;
+    }
+
+    h1{
+      font-size:clamp(44px,7vw,92px);
+
+      line-height:.96;
+
+      letter-spacing:-4px;
+
+      margin-bottom:24px;
+    }
+
+    h1 span{
+      color:var(--blue);
+      font-family:"Playfair Display",serif;
+    }
+
+    .hero p{
+      color:var(--muted);
+
+      font-size:18px;
+      line-height:1.8;
+
+      max-width:590px;
+
+      margin-bottom:34px;
+    }
+
+    .actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+
+      padding:15px 22px;
+
+      border-radius:999px;
+
+      border:1px solid var(--stroke);
+
+      background:rgba(255,255,255,.06);
+
+      color:white;
+      font-weight:700;
+
+      transition:.3s ease;
+    }
+
+    .btn.primary{
+      background:
+      linear-gradient(135deg,var(--cyan),var(--blue));
+
+      color:#04101b;
+
+      border:none;
+
+      box-shadow:0 18px 45px rgba(74,184,255,.25);
+    }
+
+    .btn:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 45px rgba(0,0,0,.28);
+    }
+
+    .hero-card{
+      padding:18px;
+
+      border:1px solid var(--stroke);
+      border-radius:36px;
+
+      background:
+      linear-gradient(
+      145deg,
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.04)
+      );
+
+      box-shadow:var(--shadow);
+
+      animation:softTilt 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes softTilt{
+
+      from{
+        transform:rotateY(-4deg) rotateX(2deg) translateY(0);
+      }
+
+      to{
+        transform:rotateY(4deg) rotateX(-2deg) translateY(-12px);
+      }
+    }
+
+    .hero-card img{
+      width:100%;
+      display:block;
+      border-radius:26px;
+    }
+
+    section{
+      padding:90px 0;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+
+      gap:24px;
+
+      margin-bottom:34px;
+    }
+
+    .section-head h2{
+      font-size:clamp(34px,4vw,58px);
+      letter-spacing:-2px;
+    }
+
+    .section-head p{
+      color:var(--muted);
+
+      max-width:520px;
+
+      line-height:1.7;
+    }
+
+    .projects,
+    .services{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .project{
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+
+      background:var(--card);
+
+      overflow:hidden;
+
+      transition:.35s ease;
+
+      box-shadow:0 18px 55px rgba(0,0,0,.18);
+    }
+
+    .project:hover{
+      transform:translateY(-10px);
+
+      border-color:
+      rgba(126,232,255,.35);
+    }
+
+    .thumb{
+      height:210px;
+
+      background:
+      linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.45)),
+      var(--img);
+
+      background-size:cover;
+      background-position:center;
+    }
+
+    .project-content{
+      padding:22px;
+    }
+
+    .project-content h3{
+      font-size:21px;
+      margin-bottom:8px;
+    }
+
+    .project-content p,
+    .service p{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .service{
+      min-height:230px;
+
+      padding:28px;
+
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+
+      background:
+      linear-gradient(
+      145deg,
+      rgba(255,255,255,.10),
+      rgba(255,255,255,.035)
+      );
+
+      transition:.35s ease;
+    }
+
+    .service:hover{
+      transform:translateY(-8px);
+
+      background:
+      linear-gradient(
+      145deg,
+      rgba(74,184,255,.14),
+      rgba(255,255,255,.04)
+      );
+    }
+
+    .service .num{
+      color:var(--blue);
+      font-weight:800;
+      margin-bottom:22px;
+    }
+
+    .service h3{
+      font-size:23px;
+      margin-bottom:12px;
+    }
+
+    .cta{
+      text-align:center;
+
+      border:1px solid var(--stroke);
+      border-radius:40px;
+
+      padding:70px 28px;
+
+      background:
+      radial-gradient(circle at 50% 0%,rgba(74,184,255,.20),transparent 45%),
+      rgba(255,255,255,.055);
+
+      box-shadow:var(--shadow);
+    }
+
+    .cta h2{
+      font-size:clamp(34px,5vw,70px);
+      letter-spacing:-3px;
+      margin-bottom:18px;
+    }
+
+    .cta p{
+      color:var(--muted);
+
+      max-width:650px;
+
+      margin:0 auto 30px;
+
+      line-height:1.8;
+    }
+
+    footer{
+      padding:34px 0 50px;
+
+      color:var(--muted);
+
+      text-align:center;
+
+      font-size:14px;
+    }
+
+    .reveal{
+      opacity:0;
+
+      transform:translateY(38px);
+
+      filter:blur(10px);
+
+      transition:
+      1s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.show{
+      opacity:1;
+
+      transform:translateY(0);
+
+      filter:blur(0);
+    }
+
+    .delay-1{
+      transition-delay:.12s;
+    }
+
+    .delay-2{
+      transition-delay:.22s;
+    }
+
+    .delay-3{
+      transition-delay:.32s;
+    }
+
+    @media(max-width:900px){
+
+      header{
+        top:10px;
+        border-radius:24px;
+      }
+
+      nav a:not(.nav-cta){
+        display:none;
+      }
+
+      .brand img{
+        width:64px;
+        height:40px;
+      }
+
+      .brand span{
+        font-size:13px;
+      }
+
+      .hero-grid{
+        grid-template-columns:1fr;
+        gap:34px;
+      }
+
+      h1{
+        letter-spacing:-2px;
+      }
+
+      .hero-card{
+        animation:none;
+      }
+
+      .projects,
+      .services{
+        grid-template-columns:1fr;
+      }
+
+      .section-head{
+        display:block;
+      }
+
+      .section-head p{
+        margin-top:12px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <header>
+
+    <a href="#" class="brand">
+      <img src="logo.png" alt="Webloom Studio logo">
+      <span>Webloom Studio</span>
+    </a>
+
+    <nav>
+      <a href="#work">Projects</a>
+      <a href="#services">Services</a>
+
+      <a href="#contact" class="nav-cta">
+        Contact
+      </a>
+    </nav>
+
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container hero-grid">
+
+        <div>
+
+          <div class="eyebrow reveal">
+            Web Design & Development
+          </div>
+
+          <h1 class="reveal delay-1">
+            Modern websites that help brands
+            <span>bloom.</span>
+          </h1>
+
+          <p class="reveal delay-2">
+            We create cinematic, modern and high-converting websites
+            for restaurants, cafés, tourism brands and premium businesses.
+          </p>
+
+          <div class="actions reveal delay-3">
+
+            <a href="#work" class="btn primary">
+              View Projects →
+            </a>
+
+            <a href="#services" class="btn">
+              What we do
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="hero-card reveal delay-2">
+
+          <img src="logo.png" alt="Webloom Studio logo">
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="work">
+
+      <div class="container">
+
+        <div class="section-head reveal">
+
+          <div>
+
+            <div class="eyebrow">
+              Selected Work
+            </div>
+
+            <h2>
+              Recent Projects
+            </h2>
+
+          </div>
+
+          <p>
+            Examples of premium visual directions for restaurants,
+            cafés, tourism and modern local brands.
+          </p>
+
+        </div>
+
+        <div class="projects">
+
+          <article class="project reveal">
+
+            <div class="thumb"
+            style="--img:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop')"></div>
+
+            <div class="project-content">
+
+              <h3>
+                Seaside Restaurant
+              </h3>
+
+              <p>
+                Cinematic landing page with menu, gallery,
+                reviews and mobile-first reservation flow.
+              </p>
+
+            </div>
+
+          </article>
+
+          <article class="project reveal delay-1">
+
+            <div class="thumb"
+            style="--img:url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1200&auto=format&fit=crop')"></div>
+
+            <div class="project-content">
+
+              <h3>
+                Café Experience
+              </h3>
+
+              <p>
+                Warm, modern website for a café brand with elegant visuals and smooth interactions.
+              </p>
+
+            </div>
+
+          </article>
+
+          <article class="project reveal delay-2">
+
+            <div class="thumb"
+            style="--img:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop')"></div>
+
+            <div class="project-content">
+
+              <h3>
+                Tourism Villa
+              </h3>
+
+              <p>
+                Premium tourism landing page focused on atmosphere, trust and direct bookings.
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="services">
+
+      <div class="container">
+
+        <div class="section-head reveal">
+
+          <div>
+
+            <div class="eyebrow">
+              Services
+            </div>
+
+            <h2>
+              What Webloom builds
+            </h2>
+
+          </div>
+
+          <p>
+            Clean design, smooth experience and simple delivery for businesses
+            that want to stand out online.
+          </p>
+
+        </div>
+
+        <div class="services">
+
+          <div class="service reveal">
+
+            <div class="num">
+              01
+            </div>
+
+            <h3>
+              Website Design
+            </h3>
+
+            <p>
+              Premium visual direction, modern layouts,
+              mobile-first structure and strong first impression.
+            </p>
+
+          </div>
+
+          <div class="service reveal delay-1">
+
+            <div class="num">
+              02
+            </div>
+
+            <h3>
+              Development
+            </h3>
+
+            <p>
+              Fast, responsive and premium websites built for modern businesses and strong online presence.
+            </p>
+
+          </div>
+
+          <div class="service reveal delay-2">
+
+            <div class="num">
+              03
+            </div>
+
+            <h3>
+              Digital Presence
+            </h3>
+
+            <p>
+              Clear sections, call-to-action buttons,
+              maps, reviews, contact links and brand presentation.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="cta reveal">
+
+          <div class="eyebrow">
+            Start Growing Online
+          </div>
+
+          <h2>
+            Let your business bloom.
+          </h2>
+
+          <p>
+            A modern website can make a small business
+            feel trustworthy, premium and ready for new customers.
+          </p>
+
+          <a href="mailto:webloomstudiogreece@gmail.com"
+          class="btn primary">
+
+            webloomstudiogreece@gmail.com →
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Webloom Studio — Modern Web Design & Development
+  </footer>
+
+  <script>
+
+    const observer = new IntersectionObserver((entries) => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add('show');
+
+        }
+
+      });
+
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal')
+    .forEach(el => observer.observe(el));
+
+  </script>
+
+</body>
+</html>
