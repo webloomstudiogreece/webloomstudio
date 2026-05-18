@@ -5,22 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Webloom Studio | Modern Web Design</title>
 
+  <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" type="image/png" href="logo.png">
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --stroke: rgba(255,255,255,.12);
-      --text: #f4f7fb;
-      --muted: #a9b7c7;
-      --blue: #4ab8ff;
-      --cyan: #7ee8ff;
-      --card: rgba(255,255,255,.07);
-      --radius: 28px;
-      --shadow: 0 30px 90px rgba(0,0,0,.45);
+      --stroke:rgba(255,255,255,.12);
+      --text:#f4f7fb;
+      --muted:#a9b7c7;
+      --blue:#4ab8ff;
+      --cyan:#7ee8ff;
+      --card:rgba(255,255,255,.07);
+      --radius:28px;
+      --shadow:0 30px 90px rgba(0,0,0,.45);
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
@@ -31,9 +30,9 @@
       color:var(--text);
       overflow-x:hidden;
       background:
-      radial-gradient(circle at 20% 20%, rgba(74,184,255,.16), transparent 32%),
-      radial-gradient(circle at 80% 10%, rgba(126,232,255,.10), transparent 28%),
-      linear-gradient(180deg,#04101b 0%,#071827 42%,#030911 100%);
+        radial-gradient(circle at 20% 20%, rgba(74,184,255,.16), transparent 32%),
+        radial-gradient(circle at 80% 10%, rgba(126,232,255,.10), transparent 28%),
+        linear-gradient(180deg,#04101b 0%,#071827 42%,#030911 100%);
     }
 
     body::before{
@@ -42,8 +41,8 @@
       inset:0;
       pointer-events:none;
       background-image:
-      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
       background-size:70px 70px;
       mask-image:linear-gradient(to bottom, rgba(0,0,0,.45), transparent 75%);
       z-index:-2;
@@ -299,8 +298,8 @@
     .thumb{
       height:210px;
       background:
-      linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.45)),
-      var(--img);
+        linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.45)),
+        var(--img);
       background-size:cover;
       background-position:center;
     }
@@ -350,8 +349,8 @@
       border-radius:40px;
       padding:70px 28px;
       background:
-      radial-gradient(circle at 50% 0%,rgba(74,184,255,.20),transparent 45%),
-      rgba(255,255,255,.055);
+        radial-gradient(circle at 50% 0%,rgba(74,184,255,.20),transparent 45%),
+        rgba(255,255,255,.055);
       box-shadow:var(--shadow);
     }
 
@@ -421,7 +420,6 @@
       }
 
       h1{letter-spacing:-2px}
-
       .hero-card{animation:none}
 
       .projects,
@@ -462,7 +460,7 @@
   <header>
     <a href="#" class="brand">
       <img src="logo.png" alt="Webloom Studio logo">
-      <span>Webloom test Studio</span>
+      <span>Webloom Studio</span>
     </a>
 
     <nav>
@@ -770,13 +768,13 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
-          entry.target.classList.add('show');
+          entry.target.classList.add("show");
         }
       });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.reveal')
-    .forEach(el => observer.observe(el));
+    document.querySelectorAll(".reveal")
+      .forEach(el => observer.observe(el));
   </script>
 
 </body>
